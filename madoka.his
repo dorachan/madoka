@@ -1,0 +1,579 @@
+ まどかちゃんのれきし --- history of pirc madoka
+madoka 3.47.9
+  CHANNEL #chan +k hoge などとしたときに hoge が認識されていなかったのを修正
+  client の connect 部分の問題の修正
+  dcc 受信時に送ってきた人の nick が違っていることがあったのを修正
+
+madoka 3.47.8
+  /server host で server 切替ができなくなっていたのを修正
+  最初に指定した server で、接続できなかったときのエラーメッセージの
+  server name が違っていたのを修正。
+
+madoka 3.47.7
+  priv で CHMAILTO が使えなかったのを修正
+
+madoka 3.47.6
+  一部の環境で DCC がうまく動かなかったのを修正
+
+madoka 3.47.5
+  DOWN が T 指定してあるとき、１度しか再起動しなかったのを修正
+  USER が無効になっていたのを修正
+  madoka.doc > madoka.txt に変更
+
+madoka 3.47.4
+  3.47.1 の NICKMODE on のときの問題の修正
+  docの修正
+
+madoka 3.47.3
+  CHMAILTO が動作していなかったのを修正
+  NOLOG のあとに PREFIX をかくと起動しなかったのを修正
+
+madoka 3.47.2
+  LOGMODE が動作していなかったのを修正
+
+madoka 3.47.1
+  awaynick がすでに使われている時に join させ、一度 client 接続して切断すると
+  nick が変更されない(NICKMODE on のとき)のを修正
+  LOGMAILTO が動作しなくなっていたのを修正
+  発言が長すぎると LOG が化けていたのを修正
+
+madoka 3.47
+  Torochat, mIRC, PIRCH32 に対応
+  autodown を、時間指定(00分のみ)できるようにする
+  Topic が長すぎると LOG が化けていたのを修正
+  .pircrc 読み込み部の変更
+  変数初期化順序の変更
+  sub sendCx およびそれに関連する部分を削除
+  client 接続時の ctcp clientinfo をやめる
+  各種メッセージ変更
+
+madoka 3.46
+  3.47 に吸収
+
+madoka 3.45.5
+  何かのバグを修正
+
+madoka 3.44.10/3.45.4
+  perl5 で、Socket.pm がないときに動作しなかったのを修正
+
+madoka 3.45.3
+  PREFIXで指定されたディレクトリがないとき、LOGが生成されなかったのを修正
+  DCCCLIENT off が無効になっていたのを修正
+
+madoka 3.45.2
+  DCCCLIENT のdefault値が設定されていなかったのを修正
+
+madoka 3.44.9/3.45.1
+  s_pong で最後に \n がなかったのでつける
+  c_bye でログに記録されるのがおかしかったのを修正
+
+madoka 3.45
+  DCCMODE on のとき、client接続をするとDCCをclientに通すようにする
+  DCCreportに転送レートの表示を加える
+  defaultでjoinしないchannelを設定できるようにする
+  CHOCOAから /send が送れないため、/csend をaliasにする
+
+madoka 3.44.8
+  DCC SENDのときにCHOCOAの「閲覧」で見えなくなっていたバグを修正
+
+madoka 3.44.7
+  DCCができなくなっていたのを修正
+  perl5 で、socket: Protocol not supported と出ることがあったのを修正
+  Murichat/Multichatでnickを同じにしなくても接続できるようにした
+
+madoka 3.44.6
+  PREFIXで同じファイルに書き込む設定の時、ファイルの最後に来るはずの
+  タイムスタンプが次のファイルの先頭に来ていたのを修正
+  bind時にINADDR_ANYを使うようにした
+
+madoka 3.44.5
+  perl4でerrorが出ていたのを修正
+
+madoka 3.44.4
+  PREFIXまわりの修正
+
+madoka 3.44.3
+  LOGが1チャンネルしか記録されていなかったのを修正
+
+madoka 3.44.2
+  versionが正しくなかったのを修正
+  ログを分割しない時、日付だけのファイルが作成されていたのを修正
+  puchkの誤字を修正(v1.4)
+
+madoka 3.44.1
+  docの間違いを修正
+  PREFIXまわりの修正
+
+madoka 3.44
+  /bye したときなどに、portを解放するようにした
+  複数の CHMAILTO, LOGMAILTO に対応
+  DOWN を指定することにより、一定時間ごとに再起動するようにした
+  channelごとにLOGをとる/とらないの指定ができるようにした
+  それによるLOGRECの廃止
+  split時の処理を廃止
+  s_??? の追加、修正
+  mode +o || mode +v つきでjoinしてきたときに$nameslistが書き換えてい
+  なかったのを修正
+  3.43.3で、PREFIXで…の修正が、うまく動作していなかったのを修正
+  puchk(v1.3)をパッケージに加える。mksock.cは廃止
+  sample.pircrc書き換え
+
+madoka 3.43.3
+  3.43.1, 3.43.2 で、priv messageが見えなかったのを修正。
+  CHANNELで、大文字小文字の違いを区別していたのを修正
+  PREFIXにおなじ文字列を書いた場合、そのファイルの一部が重複して記録さ
+  れていたのを修正
+
+madoka 3.43.2
+  3.43.1で、clientを切断した時に落ちるバグを修正
+
+madoka 3.43.1
+  SERVER, SV でport指定した時にportが有効になっていなかったのを修正
+  CHMAILTO, LOGMAILTO を指定してもメールの内容が空だったのを修正
+  channel名の大文字小文字同一視が一部おかしかったのを修正
+
+madoka 3.43
+  LOGを、チャンネルごとに指定したディレクトリに格納できるようにする
+  これによりPREFIXの文字数制限を廃止
+  CHMAILTO 新設。LOGをチャンネルごとにメールできるようにする
+  LOGをメールするときに、subjectを変数で置き換えられるようにする
+  *.jp でないひとが、serverから +o されると自動で -o していた機能を廃止
+  3.42.* で、Ping Timeoutしているのにそれが認識できずにLOGに時間だけし
+  か書き込まれなくなることがあったのを修正
+  sample.pircrcを一部書き換え
+
+madoka 3.42.7
+  LISTしたときにTopicのあたまに : がついてたのを修正
+  CHOCOAなどで終了させようとしてもできなかったのを修正
+
+madoka 3.42.6
+  autojoin失敗時に$chanlistに整合性がなくなっていたのを修正
+  join時のlog messageの一部修正
+  DOCに抜けているところがあったのを修正
+
+madoka 3.42.5
+  send messageの修正
+
+madoka 3.42.4
+  sub sendC で、undefined symbol が出ることがあったのを修正
+  madoka.his の並びを上から新しい順にする
+
+madoka 3.42.3
+  3.42.2の追加修正
+
+madoka 3.42.2
+  .pircmodesで、チャンネル指定しないとなると配布していなかったのを修正 (3.42)
+
+madoka 3.42.1
+  ログ分割がうまくいかないことがあったのを修正
+  MODECOUNT でrandom指定できるように修正
+
+madoka 3.42
+  OPER廃止
+  それに関する部分も削除
+  sub join_serverのJOIN部分の変更
+  miyu版から残っていたよくわからなかった部分を削除/修正
+  sub AddList, sub ChangeList変更
+  perl -cw ででていたwarningをでないようにした
+  closed server時のメッセージをちゃんとみるようにする
+  それによる sub s_error の作成
+  なると配布時に設定しても配布できないことがあったのを修正
+  その他細かいところを多数修正
+
+madoka 3.41.2
+  privを別ログにした時(CHANNEL PRIV)、自分のprivがprivログに記録され
+  ていなかったのを修正
+
+madoka 3.41.1
+  join時のLOGのあとに改行が入っていたのを修正
+
+madoka 3.41
+  dcc reportの簡素化
+  JOIN messageの2.9.x 対応
+
+madoka 3.40.2
+  c_pid で、ppidも表示するようにする。
+  それによるdocの変更
+
+madoka 3.40.1
+  PART messageの表示がおかしかったのを修正
+  madoka.doc: KICKMES > KICKPRIV に修正
+
+madoka 3.40
+  madoka.doc 全面更新
+  sample.pircrc かきなおし
+  $pirc_source 変更
+  dccのメッセージを一部変更(dcc > DCC)
+  OPTION で、外部ファイルをreqireできるようにする
+  NOTICE メッセージをlogに書くようにする
+  SERVERを IPaddress で書いた場合、認識されていなかったのを修正
+  dcc sendのとき、相手が受け取ってくれないとdccのプロセスが残るので、
+  timeoutするようにする
+  これまで SVn (nは数字)でもserverの認識をしていたが、しないように
+  する(SVはOK)
+  LOGGZ, LOGMAIL で、引数を指定すると起動できなかったのを修正
+
+madoka 3.36.2
+  clientにメッセージが送られていなかったのを修正
+
+madoka 3.36.1
+  LOGGZと、LOGMAILがないと終了してしまっていたバグを修正。
+
+madoka 3.36
+  dcclog/topiclogのファイル名を指定できるようにする。(DCCFILE/TOPICFILE)
+  .pircrcにSERVERを書かずに、SVのみ書いた場合でも起動できるようにする
+  .pircrcのTOPICを有効にする(たぶん)
+  .pircmodesを更新した時以外にも読み込んでいたのを修正
+  起動時にnick collisionしていた場合、joinできず、ログが増大していたバ
+  グを修正
+  起動時にserver接続に失敗するとそのまま何もできなくなっていた(?)のを修正
+  logを指定アドレスにメールするオプションの追加
+  logを圧縮するオプションを追加
+
+madoka 3.35.15
+  dcc autoget onのとき、dccを受け取るとclient側にもctcpを通していたのを
+  修正
+
+madoka 3.35.14
+  tab幅の変更(あまり関係ない)
+  dcclog rec modeがoffのときにdcclogを生成していたのを修正
+  topiclog modeがoffのときにtopiclogを生成していたのを修正
+  topiclogのtopicがおかしくなることがあったのを修正
+
+madoka 3.35.13
+  clientを切り離すと落ちるため、/quit をもとにもどす
+  docにTOPICLOGの記述が抜けていたのを修正
+  dccget時にdcclogのchmodをしてなかったのを修正
+  topiclogのファイル名がおかしかったのを修正
+
+madoka 3.35.12
+  /quit コマンドの修正
+  dcclogを記録しないモードの追加
+  topiclogを記録できるようにする
+
+madoka 3.35.11
+  -rc, -modes がうまく動作していなかったのを修正
+  ctcp pingをclientに通してなかったのを修正
+  sub ExistListの処理変更
+  sub s_319 の追加
+
+madoka 3.35.10
+  versionがtest版になっていたのを修正
+  s_322, s_353のchannel(:*.JP)の処理追加
+  .pircmodesで、１行に複数の $from!$where を書くと認識していなかったのを修正
+
+madoka 3.35.9
+  ctcp echo, ctcp pingの修正
+  perl 5.003_97 以降の対応のための修正
+  pircmodes を書き換えられていたときのみ読むようにする
+  DCCのlogをとるようにする
+  DCC send|get 時のメッセージの変更
+
+madoka 3.35.8
+  変数名が違っていて、DCCができなかったのを修正
+
+madoka 3.35.7
+  細かいバグの修正
+
+madoka 3.35.6
+  DCCDIR , -rc , -modes で ~ を展開していなかったのを修正
+  irchat.el でnickの変更が見えないことがあったのを修正
+  ctcp echo, ctcp pingが違ってたのを修正
+  :*.JP のチャンネルの処理の修正
+  sub local_chan の引数、返り値の変更。それにともなう修正。
+  madok3xx.pl, madok3xx.doc を madoka.pl, madoka.doc にする。
+  archive名を madok3xx.tar.gz から mdk3xx.tar.gz にする
+
+madoka 3.35.5
+  DCCで巨大なファイルが送れなかったのを修正
+
+madoka 3.35.4
+  serverごとにport指定できるようにする
+
+madoka 3.35.3
+  passwordまわりのバグとり
+  clientを３つ以上つなげた時に、一番最後につなげたclient以外が終了
+  するとそれ以降のclientから受け付けないようになっていたのを修正。
+
+madoka 3.35.2
+  bindできなかったときにsleepしてたのを削除
+  sub s_353 で、deleteとするはずのところをundefにしてあったのを修正
+  PARTしたときに、ログに記録されるものが変だったのを修正
+  nick already in useのとき、nickを変更していなかったのを修正
+
+madoka 3.35.1
+  client commandがうまく動作していなかったのを修正
+  doc書きなおし
+
+madoka 3.35
+  irc 2.9.2への移行にあわせた変更
+  irchatの対応versionを2.4jp23a以降に変更
+  socket.pmはないようなので検索部分を削除
+  nick, away messageの扱いの変更
+  変数まわりのコマンドを var でまとめる
+  それによる変数系コマンドの廃止
+  unknown ctcpを通常のctcpと同じように表示するようにした
+
+madoka 3.34.7
+  perl5のとき、Socket.pm もみるようにする
+  .pircrcでSERVERよりまえにSVをかくと、最初のSVが無効になっていたのを
+  修正
+  perl versionの表示桁数を増やす
+  priv時のログ出力を一部変更
+  /dcc -> /autodcc に変更
+
+madoka 3.34.6
+  鯖切替まわりのバグをとる。それにともなう.pircrcの一部変更
+  .pircrc, .pircmodes のファイル名を起動時に指定できるようにする
+  .pircrcに必要なことがかいてなかった場合、正常終了しなかったのを修正
+
+madoka 3.34.5
+  socket.pm をさがす部分が消えていたのでつける
+  dccが終了したときなどにforkしていたのを修正
+
+madoka 3.34.4
+  perl5.001, 4.019, jperl 4.019 で動かなかったのを修正
+  namesのときに自分がいないchannelだと表示されていなかったのを修正
+  BSD/OSでwaitがうまくいっていなかったのを修正
+  clientを接続したままrebootすると、ログがふくれ上がっていたのを少
+  しだけ改善(^^;
+
+madoka 3.34.3
+  3.33.0からなると配布できなくなっていたのを修正
+
+madoka 3.34.2
+  NAMESしたときに落ちることがあったので修正
+
+madoka 3.34.1
+  logに書き込まれたTopicが変だったのを修正
+  DCCのメッセージ修正
+
+madoka 3.34
+  process監視機能内蔵。これによってforkするようになった。
+  channelの大文字小文字の区別の不具合をなおす。
+  socket.phだけでなくsocket.pmもさがすようにする
+
+madoka 3.33
+  .pircrc読み込み時に行の終わりに空白があるとうまくいってなかったのを
+  修正
+  .pircrcの最後の行にCHANNELを書くと無効になってたのを修正
+  .pircrcにNICKMODEを追加。nickを自動で変更しないようにする。
+  debug mode修正
+
+madoka 3.32.4
+  NAMES, LIST, WHO, LINKS の修正
+  .pircrcのサンプルをつける
+
+madoka 3.32.3
+  3.32.1のbugfix
+  SOURCEの変更
+
+madoka 3.32.1
+  server close時のserver切替がうまくいってなかったのを修正。
+  すでにmiyu6beta08とはかけはなれてきたため、pirc madokaにする
+
+ まどかちゃんのれきし --- history of pirc 3.4.1madoka
+madoka 3.32
+  MuriChat 正式対応:-)
+  CHOCOA   正式対応:-)
+
+madoka 3.31.1
+  MuriChat 1.1beta5での動作確認。
+  CHOCOA 0.2f10Rでの動作確認。
+  LOGの書きだしの修正
+  LOGREC off のときにLOGを作成していたものを修正(たぶん(^^;)
+  client connect時の PASS NICK USER の受け取り順序が違っていたのを修正
+
+madoka 3.31
+  irchat-2.4jp22fまでに対応
+  privを分割しない場合、ログに書き込まれなかったので修正
+  rebootコマンドの削除
+  taillogがおかしかったのでなおす。
+
+madoka 3.30.2
+  debug mode = 0 のときにdebug情報が書き込まれていたのを修正
+
+madoka 3.30.1
+  なると配布部分がおかしかったので修正
+
+madoka 3.30
+  時間フォーマットを少し変更できるようにする
+  .pircrcの書式変更
+  /pircrc コマンドの追加
+  分割ログを可能にする
+
+madoka 3.19.3
+  banのマッチングミスの修正
+
+madoka 3.19.2
+  clientの情報を返していなかったので修正
+
+madoka 3.19
+  クライアントを複数つなぐと変だったので元に戻す
+  TAILLOGの行数を設定できるようにする
+
+madoka 3.18
+  /send でチャンネルに送ったときの対処
+  クライアントを複数つなげたとき、対応しているctcpをクライアント毎
+  に保存するようにした
+  logが途中で消えた場合、１時間以内に新たにlogを生成するようにした
+  unknown ctcp replyで対応しているctcpもunknownとしていたのを修正
+
+madoka 3.17
+  外部コマンドを使わないようにした
+  ctcpをクライアントにたくさん送っていたのを修正
+  ログの時間表示を変更
+  ソースを少しだけ見やすくする(^^;
+  LOGMODE を LOGREC に変更。LOGMODEの新設
+
+madoka 3.16
+  unknown ctcp replyに対応
+  unknown ctcpまわりの修正。ほか
+
+madoka 3.15
+  /chan+ , /chan- のかわりに /chanp , /chanm を作る。
+  FRSVの廃止。完全jp対応とする。
+  鯖にメッセージを送っていなかった部分があったのを修正。
+  lha圧縮からtar+gzip圧縮にする。
+
+madoka 3.14
+  クライアント接続時にローカルチャンネルのnameslistが表示されなかっ
+  たのを修正。
+  /myinfo でpirc versionもでるようにする。
+  ban解除が働いてなかったのを修正。
+  part時にチャンネル名が記録されなくなっていたのを修正。
+  server close時にrebootしてなかったのを修正。
+  /chan+ , /chan- の廃止。
+
+madoka 3.13
+  ローカルチャンネル対応部分の拡張。
+  /get をつける。
+
+madoka 3.12
+  dcc get時にdccが親プロセスになってたのを子プロになるようにする。
+  dcc send,getを実装する。
+  reboot modeをつける。
+  ローカルチャンネルに対応
+  inveteされたときのチャンネル名が違っていたのを修正。
+  `date`,`hostname`を使わないようにする。
+  process IDがみえるようにする。
+
+madoka 3.11
+  +iに対するautomodeを追加。
+  ctcp messageをクライアントに送らなくなっていたのを修正。
+  環境変数の廃止。
+  なると配布カウンタのdefaultを変更。
+
+madoka 3.10
+  ban解除がおかしくなってたのを修正。
+  socket.phを読まなくなっていたのを修正。
+  なるとのニック変更部分の修正。
+  autojoinchannelに含まれるチャンネルからinviteされたときに自動で
+  はいるようにした。
+  コマンドラインに戻らないようにした。
+
+madoka 3.09
+  channelにbanなどで入れなかったあと、/myuser するとYou are in にそ
+  のchannelが含まれていたのを修正。
+  domainname取得方法の変更。banの解除部分の修正。
+  発言が空のとき(No text to send)、ログに書き込まないようにした。
+  対応していないctcp messageをクライアントにに送らないようにした。
+
+madoka 3.08
+  banの解除部分の修正。debug modeをつける。
+
+madoka 3.07
+  なるたーのちぇっくを変更する。
+  +bしてkickしたあと、一定時間後に解除するようにする。
+  banのチェックが違ってたのを修正。
+
+madoka 3.06
+  3.05で、-b するところがループしていたのを修正。
+
+madoka 3.05
+  pirc start時にversionをだすようにする。
+  nickのマッチングでエラーを出すことがあったのを修正。
+  クライアント接続時のエラーを修正。
+
+madoka 3.03
+  LOG記録ディレクトリの指定をできるようにする。
+  /bye したときにログにもbyeメッセージが残るようにする。
+  存在するnickに変更しようとしたあとに、serverにつなぎなおすとつな
+  がらなかったのを修正。
+  auto mode修正をつける。
+
+madoka 3.02
+  auto kick,auto privが動かなかったのを修正。
+  一部の.pircrcに書く変数が、default値以外にならなかったのを修正。
+  なると配布時のチェックを修正。
+
+madoka 3.00
+  perl 5 に対応。
+  LOG記録モードの書式変更。
+  /dccdir としたときにエラーが出たのを修正。
+  なると配布対象の人が配布前ににっくを変更したときの対策。
+  auto kick(with ban,priv),auto privをつける。
+
+madoka 2.14
+  2.11と2.12ではなぜかなるとを配らなかったらしい。
+  ＃単にコメントアウトしてあっただけだけど(^^;
+  なるとを配る前に配布対象の人が抜けた場合、配列から削除するように
+  した。(別の人が同じnickで入ってきたときの対策)
+
+madoka 2.13           thanks to pupu_j
+  jp21で動かなかったバグをとる
+  なるたーの配布対象になる人がjoinしたとき、他の誰かがなるとを配っ
+  た場合、配らないようにした
+
+madoka 2.12           thanks to pupu_j
+  irchat2.4jp21対応:-)
+  LOG記録モードを変更しようとすると落ちていたのをなおす。
+
+madoka 2.11           thanks to ohzak
+  DCCDIRを設定しなかったときの default directoryが /tmp になってた
+  ので ~/tmp になおす。
+  LOGを記録しないモードをつける。
+  socket関係をなおす
+
+madoka 2.10
+  おーととぴくを直す。直ったかどうかわからないけど(^^;
+  他も少しいじる:-)
+
+madoka 2.08
+  .pircmodesの読み込みが変だったのを直す。
+  多分なおっていると思うけど、よくわからない(^^;
+
+madoka 2.07
+  split対策がうまくいってなかったので直す。
+
+madoka 2.05
+  $nameslistがおかしかったので、関連部分の修正。
+  なんだか別のところもおかしい気がするけど、よくわからない(^^;
+
+madoka 2.0
+  cookie2.0ができた直後になるとつけないというバグがあったのでなおす。
+  変数が違ってたのもなおす。ついでになまえも変える(^^;
+
+ くっきー版ひすとりー --- history of pirc 3.4.1cookie
+cookie 2.0  by cookie_j  thanks to pupu_j
+  mokona6にあわせてつくる。.pircmodesの書式変更。
+  /dcc もなおる。その他たくさんコマンドを増やす。
+
+ 古いもこなのひすとりー --- history of pirc 3.4.1miyu6beta07mokona
+mokona4c   by cookie    thanks to L-afe
+  split対策の完成。ただ、/quit .ac.jp とかやって落ちた場合には対応して
+  いない。今後する予定もなし。
+
+  /dcc コマンドが不安定であることがわかる。
+
+mokona3    by pupu_j    thanks to ohzak
+  オートなるたーをアカウントを見るようにする。
+  DCC autoget機能にコマンド追加。
+  split対策をしようとするが、うまくいかなかったのでやめる。
+
+mokona2    by pupu_j
+  DCC autoget機能搭載。ただし、オートゲットするだけ。
+
+mokona1    by pupu_j
+  オートなるたー搭載。ただし、アカウントは見ていない。
+

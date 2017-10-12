@@ -1,0 +1,460 @@
+#
+# まどかちゃん 3.47.9 どきゅめんと
+#
+#                1997 Jul  2    Y.Ohno
+#  last modified 1998 Aug 28  cookie_j, pey_j
+
+
+0. はじめに
+
+0.1 まどかちゃんとは？
+
+  まどかちゃんはperlで動く、IRC常駐scriptです。
+
+  まどかちゃん（pirc madoka3.x(以下 madoka版)）は、
+  pirc version 3.4.1miyubeta07(以下 miyu版) および
+  pirc version 3.4.1mokona6 , 3.4.1mokona6.08.10以降(以下 mokona版)
+  をもとに作られています。
+  が、既に原型をとどめていません(^^;
+
+0.2 最新版の配布場所
+
+  まどかちゃん3.xの最新版は
+    http://cc.nekomimi.gr.jp/madoka/
+    http://cookie.ririka.or.jp/madoka/
+    http://www.eds.ecip.nagoya-u.ac.jp/~cookie/madoka/
+
+    ftp://ftp.nekomimi.gr.jp/pub/madoka/
+    ftp://ftp.eds.ecip.nagoya-u.ac.jp/pub/net/irc/pirc/madoka/
+  においてあります。
+
+
+1. 使用方法
+
+1.1 対応クライアント
+
+  対応しているircクライアントは次の通りです。
+   ・irchat-2.4jp23a 以降
+   ・CHOCOA
+   ・Murichat
+   ・Multichat
+   ・WoolChat
+   ・Torochat
+   ・mIRC
+   ・ircle 3.0b9(1997/10以降release分) 以降
+   ・PIRCH32
+
+  以下のクライアントは一部制限があります
+   ・irchat-2.4jp22f 以前
+       接続はできますが、一部問題が出る可能性があります。
+   ・irc II
+       ircII側のnickをmadoka側のnickと同じにする必要があります。
+   ・TakIRC
+       TakIRCのnickをmadokaのaway(あれば)に設定すると接続できます。
+       ただし、終了させると全部のチャンネルからpartしてくれます(笑)
+   ・ircle 3.0b9 (1997/10以降release分) 以降
+       ircle側のnickをmadoka側のnickと同じにする必要があります。
+   ・mIRC 等の海外製クライアント
+       文字コードが変換されないため、sjisで入力するとそのまま流れます。
+
+1.2 動作環境
+
+  まどかちゃんはperlスクリプトです。
+   ・perl 4.019/4.036
+   ・perl 5.003以降
+   ・jperl(perlのversionに準ずる)
+  の上で動作すると思われます(^^;
+
+
+1.3 必要なファイル
+
+  まどかちゃんを動かすためには次のファイルが必要です。
+   ・.pircrc  （設定ファイル）
+   ・perl4: sys/socket.ph, netinet/in.ph
+     perl5: Socket.pm
+     まどかちゃんのアーカイブに同梱の puchk を
+
+      % perl puchk
+
+     のようにすれば、ファイルの有無の判定、ない場合はファイルの作成をしま
+     す。これでもうまく動かない場合はドキュメント最後の問い合わせ先か、ま
+     たはマシンの管理者に問い合わせて下さい。
+
+1.4 起動方法
+
+  unixのコマンドプロンプトにおいて
+       % ./madoka.pl               #perlが /usr/local/bin にあるとき
+       % perl madoka.pl            #それ以外にあるとき
+  などとしてください。
+
+  まどかちゃん起動時には .pircrc と .pircmodes（後述）を読みに行きますが、
+  オプションとして -rc や -modes を指定することにより
+  それらのファイル名を指定することができます。
+  ２つ同時に指定することも可能です。
+    -rc filename
+     .pircrc のファイル名を指定します。
+    -modes filename
+     .pircmodes のファイル名を指定します。
+
+  （例） % ./madoka.pl -rc .pircrc.puni -modes .pircmodes.puni
+
+
+2. ファイルの書き方
+
+2.1 .pircrc
+
+  .pircrcにはまどかちゃんの基本設定や機能に関する設定を記述します。
+  .pircrcは、
+     オプション -rc で指定したファイル
+     ./.pircrc
+     ~/.pircrc
+  の順番で検索します。
+  以下のものが設定できますが、漢字コードは必ずjisにしてください。
+  「(text)」のところには適当な文字列(数字)を、
+  「{on|off}」のところには「on」か「off」のどちらかを書いて下さい。
+  同様に中括弧内を｜で区切られたものは、それらのうちいずれかを書いて下さい。
+  またNICK、SERVER、PASSWDの３つは必ず必要です。
+
+
+    NICK (nick)
+      ニックネームの設定です。半角英数９文字以内で記述してください。
+    NAME (name)
+      /whois で返ってくる本名を設定します。
+    SERVER (sv)
+      接続するircサーバを設定します。
+         SERVER irc.punipuni.jp
+         SERVER irc.hogehoge.jp
+      のように複数記述することも可能です。
+      その場合、記述された順番に接続を試みます。
+      ポートの指定も可能です。
+         SERVER irc.punipuni.jp:5555
+      のように指定します。指定しない場合はSPROT、6667の順に見ます。
+      SERVERのかわりにSVも使えます。
+    SPORT (num)
+      サーバのポート番号を指定します。defaultは6667です。
+    CPORT (num)
+      クライアントのポート番号を指定します。defaultは6667です。
+    PORT (num)
+      サーバ、クライアントの両方のポート番号を指定します。
+      SPORTやCPORTが設定されていればそちらが優先されますが、
+      通常は使用しません。
+    PASSWD  (pass)
+      クライアントを立ち上げた際に入力するパスワードを指定します。
+    USERINFO  (text)
+      ユーザ情報を設定します。
+    AWAYMSG  (mes)
+      クライアントが接続されてないときに /whois されたときなどに
+      返すメッセージを指定します。
+    AWAYNICK  (nick)
+      クライアントが接続されてないときの nick です。
+    AJOIN {on|off}
+      auto join機能の設定です。default は on です。
+    AKICK {on|off}
+      auto kick機能の設定です。default は off です。
+    AOPMODE {on|off}
+      operetor auto get機能の設定です。default は on です。
+    APRIV {on|off}
+      auto priv機能の設定です。default は off です。
+    ARMODE {on|off}
+      auto mode(auto repair mode)機能の設定です。default は off です。
+    ATOPIC {on|off}
+      auto topic機能の設定です。default は off です。
+    CHANNEL (chan)
+      まどか立ち上げ時に自動で入るチャンネルを書きます。
+      チャンネルごとに次の形式で設定が可能です(括弧内は省略可)。
+        CHANNEL   channel_name (mode)
+        (PREFIX    logprefix)
+        (TOPIC     channel_topic)
+        (KEY       channel_key)
+        (CHMAILTO  mailto)
+      PREFIXを書くとそのチャンネルに関するLOGが通常の log???? とは別の
+      ファイルに書き込まれます。また、dir/prefix のように / をいれるこ
+      とにより、dir というディレクトリの下にLOGが作成されます。
+      この場合、最初のPREFIXが現れる前に、LOGDIRを書いておかないと有効
+      になりません。
+      channel_name を 「PRIV」 とすると、
+      プライベートメッセージだけ別のファイルに書き込まれます。
+      (PREFIX privが同時に指定されたことになる)
+      またTOPICはJoinしたチャンネルにtopicが存在しない場合に限り、
+      設定されたtopicをつけます。
+      CHMAILTOは、後述のLOGMAILが指定されてるときに、指定されたアドレス
+      へそのチャンネルのログだけメールします。当然、PREFIXも指定されて
+      いる必要があります。
+      cf: NJCHANNEL
+    DCCCLIENT {on|off}
+      clientが接続されている時にCTCP DCCをclientに通すかどうかを設定します。
+      DCCMODE on のときに有効です。default は on です。
+    DCCDIR (dir)
+      DCCされてきたファイルを受け取るディレクトリを指定します。
+      default は ~/tmp/ です。
+    DCCFILE (file)
+      DCCのLOGを取る場合のファイル名です。
+      default は logdcc です。
+    DCCLOG {on|off}
+      DCCに関するLOGをとるかどうかの設定です。default は on です。
+    DCCMODE {on|off}
+      DCC autoget機能の設定です。default は on です。
+    DOWN (hour)[T]
+      これを指定すると、一定時間ごとに再起動するようになります。
+      T をかくと、毎日 (hour)時に再起動します。
+      hour を指定しない場合は default の 96 が指定されたことになります。
+    DOWNMES (message)
+      auto down時のquitメッセージです。defaultは 'auto down' です。
+    KICKPRIV {on|off}
+      auto kick時にプライベートメッセージ(priv)を送るかどうかの設定です。
+      default は off です。
+    LOGMODE (num)
+      LOGファイルのパーミッションモードの設定です。
+      default は 0600 です。
+    LOGDIR (text)
+      LOGファイルを書くディレクトリです。default は ./ です。
+    LOGGZ (gzip)
+      LOG圧縮するときに使用するgzipの場所をfull pathで指定します。
+      圧縮出来ればgzipでなくてもかまいませんが、
+      その場合の動作は無保証です。
+      また、これが書かれていなければ圧縮しません。
+    LOGMAIL (text)
+      これが書かれているとmail log機能が有効になります。
+      textのところにはmailコマンドをfull pathで指定します。
+      メール出来るものなら別のコマンドのpathでもかまいませんが、
+      この場合も動作の保証は出来ません。
+      LOGMAIL /usr/ucb/mail -s $logfile とすることによって、サブジェクトに
+      LOGのファイル名を入れられます。(/bin/mail ではうまくいかない)
+    LOGMAILTO (mailto)
+      LOGMAIL が有効な場合にメールの宛先を指定します。
+      ただし、CHMAILTO が設定されている場合にはそちらが優先され、
+      CHAMAILTOが未定義のチャンネルのみ、こちらにメールされます。
+    MODECOUNT (num)[r]
+      おーとなるたー(設定は.pircmodes)が有効な場合、
+      なると配付(取り上げ)までの待ち時間を秒単位で設定します。
+      r をかくと、指定数値を最大としたランダムでなるとを配ります。
+      また、記述がない場合は 5 〜 30 でランダムに指定されます。
+    NICKMODE {on|off}
+      クライアントが接続、未接続に応じて自動でnickを
+      AWAYNICK に変更するかどうかの指定です。default は off です。
+    NJCHANNEL (chan)
+      CHANNEL と同様に設定できますが、立ち上げ時にはそのチャンネルに
+      joinしません。PREFIX,KEYなどを設定しておきたい時のみに使います。
+    NOLOG
+      LOGをとらないようにします。CHANNELより前にかいた場合はすべての
+      チャンネル、CHANNELより後にかいた場合は、直前にあるCHANNELのLOG
+      を記録しません。
+    OPTION (file)
+      指定したファイル名をrequireします。
+    RMBAN (num)
+      auto kickが有効な場合に行ったbanを解除するタイミングを
+      秒単位で指定します。default は 30 です。
+    TAILLOG (num)
+      クライアントに接続した際に表示される、
+      接続直前のLOGを表示する行数を決めます。default は 30 です。
+    TIMEFMT {0|1|2}
+      LOGに記録する際の時間の書式を指定します。
+        0   hh:mm:ss           (default)
+        1   hhmmss
+        2   hh:mm
+      これら以外の数値を指定した場合は 0 になります。
+      この書式は今後変更される可能性があります。
+    TOPICLOG {on|off}
+      topicのLOGを取るかどうかの設定です。default は off です。
+    TOPICFILE (file)
+      TOPICLOG が on の場合に書き込むLOGファイルの名前です。
+      default は logtopic です。
+
+2.2 .pircmodes
+
+  .pircmodesはおーとなるたーの対象となる人や、
+  auto kickの対象となる人などの指定を行うためのファイルです。
+  .pircmodesは、
+     オプション -modes で指定したファイル
+     ./.pircmodes
+     ~/.pircmodes
+  の順番で検索します。
+  ファイルには以下のような行をいくつか並べて書きます。
+  漢字コードはやはりjisにしてください。
+
+   channel_name(mode): nick1!user1@host1 nick2!user2@host2 ...
+
+  これらはbanに似たワイルドカードでマッチングします。
+  channel_name
+    指定するチャンネルの名前です。
+    省略するとJoinしているすべてのチャンネルが対象となります。
+  (mode)
+    設定に応じて次のものを書きます。
+      (+)  なると配布
+      (-)  なると取り上げ
+      (k)  kickする
+      (M)  (k)が有効な際のプライベートメッセージ
+      (p) そのチャンネルにJoinしてきたuserにauto privする
+      (m)  (p)が有効な際のプライベートメッセージ
+  nick1,user1,host1 ...
+    対象となるユーザを指定します。
+
+ (例)
+  %nagoya-u(+): hiro*!hirono@*.jp
+    %nagoya-uのチャンネルに入ってきた 
+    hiro*!hirono@*.jp にマッチするユーザに対してなるとを配付します。
+  (+): cookie*!*@*.nagoya-u.ac.jp
+    今Joinしているいずれかのチャンネルに入ってきた
+    cookie*!*@*.nagoya-u.ac.jp にマッチするユーザに対してなると配付します。
+
+
+3.コマンド
+
+  クライアントからコマンドを入力することにより、機能の設定が可能です。
+  ただし、一部のクライアントからはクライアントの制限により、
+  コマンドの入力が出来ません。
+  コマンドは以下のものがあります。
+  括弧書きの部分には適当な文字列(数字)を書きますが、
+  括弧そのものは書かないでください。
+  ( )は省略不可能、[ ]は省略可能な引数です。
+
+    bye [message]
+      まどかちゃんを終了します。
+      括弧内は終了時に送るメッセージです。
+    server [irc server]
+      接続先のirc serverを変更します。括弧内を省略すると、
+      (.pircrcの)SERVERの先頭を参照します。
+      次にこのコマンドを実行したときは２番目、
+      その次は３番目…と順番に参照されます。
+    passwd (passwd)
+      クライアント立ち上げ時のパスワードを変更します。
+    userinfo (info)
+      ユーザ情報を変更します。
+    mychan
+      現在Joinしているチャンネルを表示します。
+    mynames
+      現在Joinしているチャンネルのメンバーを表示します。
+    myinfo
+      現在の自分の状態を表示します。
+    amsg (message)
+      AWAYMSG を変更します。
+    anick (nick)
+      AWAYNICK を変更します。
+    autojoins
+      現在設定されているautojoinチャンネルを表示します。
+    automodes
+      現在設定されている各チャンネルの automode を表示します。
+    automode (channel_name) (mode)
+      チャンネルの automode を変更します。
+    autokeys
+      現在設定されている各チャンネルの autokey を表示します。
+    autokey (channel_name) (mode)
+      チャンネルの autokey を設定します。
+    dccdir [directry]
+      DCCで受け取るディレクトリを指定します。
+      括弧内を省略した場合は現在の受け取りディレクトリを表示します。
+    send (nick) (file)
+    csend (nick) (file)
+      file を nick にDCCします。
+    get
+      autogetがoffのとき、DCCされてきたファイルを受け取ります。
+    pid
+      まどかちゃんのpidおよび、ppidを表示します。
+    var (var_name) [arg]
+      .pircrcで設定出来る諸機能の設定を行います。
+      var_name 及びそれに対応する arg は次のものから選びます。
+      arg の形式は .pircrc での説明に準じます。
+      arg を省略した場合は現在の値を表示します。
+
+        autodcc {on|off}
+          DCC autoget機能
+        autoget {on|off}
+          operator autoget機能
+        autotopic {on|off}
+          おーととぴく
+        autojoin {on|off}
+          autojoin mode
+        apriv {on|off}
+          autopriv mode
+        akick {on|off}
+          autokick mode
+        dccclient {on|off}
+          DCC message to client
+        dcclog {on|off}
+          DCC record mode
+        ircname (text)
+          名前を変更します。
+        kpriv {on|off}
+          auto kick時に自動でprivを送るかどうか
+        log {on|off}
+          LOG record mode
+        nickmode {on|off}
+          AWAY時に自動でnickを変更するかどうか
+        opcount (text)
+          おーとなるたーがなるとを配布するまでの待ち時間
+        rmban (text)
+          auto kick時に行ったbanを解除するまでの時間
+        topiclog
+          Topicの記録をとるかどうか
+
+
+4.注意事項、その他
+
+4.1 使用条件
+
+  まどかちゃんはいわゆる「フリーウェア」です。
+    スクリプト本体の著作権は くっきー(なかそね＠名古屋大)
+    puchk の著作権は      ぷぷぅ(長谷川＠名古屋大)
+    ドキュメントの著作権は   ぺー(大野＠愛知工大)
+
+  にあります。
+  使用にあたっては以下の条件を順守してください。
+
+    1.スクリプト本体、およびドキュメントの著作権表示を改変しない。
+    2.配布の場合はスクリプト本体と同時にドキュメントも配布する。
+    3.無料で配布する。ただしメディア代等の実費の徴収は妨げません。
+    4.まどかちゃんを利用することによって生じた
+     金銭的、精神的などのあらゆる損害に対して作者は責任を負わない。
+
+4.2 謝辞
+
+  まどかちゃんの公開にあたって協力してくださったたくさんの方々に
+  改めて感謝したいと思います。
+
+   special thanks
+     akichaさま   pirc正式版の作者です。
+     miyuさま     miyu版の作者です。
+     pupu_jさま   mokona版/plumの作者です。
+     El_jさま     LoveSistersの作者です。
+
+   perlについてもいろいろ教えてもらった人
+     ohzakさま
+     El_jさま
+     pupu_jさま
+
+   ドキュメント執筆にあたって意見してくれた人
+     まどかちゃんＭＬ のみなさん
+
+   いろいろバグ出ししてもらった人
+     #じゃいすと , #まどか:*.jp , まどかちゃんＭＬのみなさん
+
+  そして、いつの間にか増えているまどかちゃんゆーざーの皆さん...
+
+4.3 今回の変更点
+
+  まどかちゃんのれきしは、madoka.his を見てね☆
+
+madoka 3.47.8
+  /server host で server 切替ができなくなっていたのを修正
+  最初に指定した server で、接続できなかったときのエラーメッセージの
+  server name が違っていたのを修正。
+
+4.4 サポート
+
+  バグレポート、まどかちゃんに対する要望、
+  また「まどかちゃんＭＬ」への参加希望は...
+
+     Nick:       cookie_j (cookie_p/cookie_d)
+     E-mail:     madoka-admin@cc.nekomimi.gr.jp または
+                 cookie@nekomimi.gr.jp  まで
+
+  puchk に関するお問い合わせは
+
+     Nick:       pupu_j (pupu_d)
+     E-mail:     pupu@cc.nekomimi.gr.jp まで
+
+  ドキュメントに関するお問い合わせ(文章表現など)は
+
+     Nick:       pey_j (pey_Zzz)
+     E-mail:     pey@wingalpha.in.aitech.ac.jp まで
+
